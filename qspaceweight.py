@@ -70,19 +70,19 @@ parser.add_argument('bvalues', nargs='+',
 
 args = parser.parse_args()
 
-bvalues=np.array(args.bvalues,dtype=np.int)
+bvalues=np.array(args.bvalues,dtype=np.int32)
 n_b0 = int(args.n_b0)
 
 schema = []
 output = []
 
-with open(args.unitary_schema) as csvfile:
+with open(args.unitary_schema, encoding='utf-8') as csvfile:
     reader = csv.reader(csvfile, delimiter='\t', quotechar='|')
     start = False
     for row in reader:
         try:
             if start:
-                u = np.array(row, dtype=np.float)
+                u = np.array(row, dtype=np.float32)
                 schema.append(u)
 
             if row[0] == "#shell":
